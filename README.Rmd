@@ -34,6 +34,10 @@ You can check whether a Synapse file has valid annotation keys and values. You
 can also check file views and data frames to see if their columns correspond to
 valid annotations, and if the values in the columns are valid.
 
+```{r load, echo = FALSE}
+pkgload::load_all()
+```
+
 ```{r login, message = FALSE, results = "hide"}
 library("synapser")
 library("dccvalidator")
@@ -102,6 +106,61 @@ a <- data.frame(specimenID = LETTERS[1:3])
 b <- data.frame(specimenID = LETTERS[1:4])
 (result <- check_specimen_ids_match(a, b, "biospecimen", "assay"))
 result$data
+```
+
+# Data submission validation
+
+This package contains a Shiny app to validate manifests and metadata for AMP-AD
+studies. It uses the dccvalidator package to check for common data quality
+issues and gives realtime feedback to the data contributor on errors that need
+to be fixed. The reporting UI is heavily inspired by the 
+[MetaDIG project's metadata quality reports](https://knb.ecoinformatics.org/quality/s=knb.suite.1/doi%3A10.5063%2FF12V2D1V).
+
+## Deployment
+
+This section is applicable to Sage employees who are deploying the application
+on our Shiny Pro server. To learn about the server and how to get credentials,
+please read the 
+[Confluence documentation](https://sagebionetworks.jira.com/wiki/spaces/SageShinyServer/pages/75497489/Shiny+Server).
+
+The app is deployed on the server through the following steps:
+
+1. ssh into the Shiny Pro server and navigate to `/home/kwoo/ShinyApps/dccvalidator-app`
+1. `git pull` changes from GitHub
+1. To ensure packages are up-to-date, run `Rscript -e "renv::restore()"`
+
+You may need to run `touch restart.txt` afterward to ensure the application is
+restarted.
+
+If you want to deploy the app in a different location (e.g. because you want to
+stand up a new version that is customized for a different community):
+
+1. ssh into the Shiny Pro server
+1. Create a folder under `/home/yourusername/ShinyApps`
+1. `git clone` the repository into the folder you've created
+1. If needed, make any changes to the application's behavior by editing the
+   files, or check out a branch that contains your changes
+1. To ensure packages are up-to-date, run `Rscript -e "renv::restore()"`
+
+Again, you may need to run `touch restart.txt` afterward to ensure the
+application is restarted.
+
+## Local development
+
+`dccvalidator` uses pre-commit hooks to check for common issues, such as code
+style (which should conform to [tidyverse style](https://style.tidyverse.org/)),
+code parsability, and up-to-date .Rd documentation. To use, you will need to
+install [pre-commit](https://pre-commit.com/#intro). If on a Mac, I recommend
+using [homebrew](https://brew.sh/):
+
+```
+brew install pre-commit
+```
+
+Then, within this git repo, run:
+
+```
+pre-commit install
 ```
 
 ---

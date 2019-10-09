@@ -1,33 +1,49 @@
 Package: dccvalidator
-Version: 0.0.0.9001
 Title: Validate CNS Data and Metadata
-Description: Performs automatic checks for common data/metadata quality issues.
-Authors@R: c(
-    person("Kara", "Woo", email = "kara.woo@sagebase.org", role = c("aut", "cre")),
-    person("Sage Bionetworks", role = c("cph"))
-    )
+Version: 0.0.0.9002
+Authors@R: 
+    c(person(given = "Kara",
+             family = "Woo",
+             role = c("aut", "cre"),
+             email = "kara.woo@sagebase.org"),
+      person(given = "Sage Bionetworks",
+             role = "cph"))
+Description: Performs automatic checks for common data/metadata quality
+    issues.
+License: MIT + file LICENSE
 Depends:
-    R (>= 3.4)
+    R (>= 3.4),
+    shinyBS
 Imports:
+    DT,
+    emo,
+    ggplot2,
+    glue,
+    golem,
+    pkgload,
     purrr,
     readxl,
     rlang,
+    shiny,
+    shinydashboard,
+    shinyjs,
+    skimr,
     stats,
     synapser,
     syndccutils,
-    tools,
-    utils
-Suggests:
-    testthat,
     tibble,
-    covr
-Additional_repositories:
-    http://ran.synapse.org
+    tools,
+    utils,
+    visdat
+Suggests:
+    covr,
+    testthat
 Remotes:
+    hadley/emo,
     Sage-Bionetworks/syndccutils/R
-License: MIT + file LICENSE
+Additional_repositories: http://ran.synapse.org
+ByteCompile: true
 Encoding: UTF-8
 LazyData: true
-ByteCompile: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1

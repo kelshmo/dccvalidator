@@ -27,12 +27,15 @@ check_col_names <- function(data, template, success_msg = NULL, fail_msg = NULL,
 #' @export
 #' @rdname check_col_names
 #' @examples
-#'
+#' \dontrun{
+#' library("synapser")
+#' synLogin()
 #' a <- data.frame(path = "/path/file.txt", parent = "syn123", assay = "rnaSeq")
 #' check_cols_manifest(a)
 #'
 #' b <- data.frame(assay = "rnaSeq")
 #' check_cols_manifest(b)
+#' }
 check_cols_manifest <- function(data,
                                 success_msg = "All manifest columns present",
                                 fail_msg = "Missing columns in the manifest",
@@ -40,7 +43,8 @@ check_cols_manifest <- function(data,
   if (is.null(data)) {
     return(NULL)
   }
-  required <- c("path", "parent")
+  id <- "syn20820080"
+  required <- get_template(id, ...)
   behavior <- paste0(
     "Manifest should contain columns: ",
     paste(required, collapse = ", ")
@@ -59,8 +63,10 @@ check_cols_manifest <- function(data,
 #' @export
 #' @rdname check_col_names
 check_cols_individual <- function(data, template,
+                                  # nolint start
                                   success_msg = "All individual metadata columns present",
                                   fail_msg = "Missing columns in the individual metadata file",
+                                  # nolint end
                                   ...) {
   if (is.null(data)) {
     return(NULL)
@@ -90,8 +96,10 @@ check_cols_individual <- function(data, template,
 #' @export
 #' @rdname check_col_names
 check_cols_assay <- function(data, template,
+                             # nolint start
                              success_msg = "All assay metadata columns present",
                              fail_msg = "Missing columns in the assay metadata file",
+                             # nolint end
                              ...) {
   if (is.null(data)) {
     return(NULL)
@@ -121,8 +129,10 @@ check_cols_assay <- function(data, template,
 #' @export
 #' @rdname check_col_names
 check_cols_biospecimen <- function(data, template,
+                                   # nolint start
                                    success_msg = "All biospecimen columns present",
                                    fail_msg = "Missing columns in the biospecimen metadata file",
+                                   # nolint end
                                    ...) {
   if (is.null(data)) {
     return(NULL)
@@ -158,7 +168,7 @@ get_template <- function(synID, ...) {
   template <- try(synapser::synGet(synID, ...), silent = TRUE)
   if (inherits(template, "try-error")) {
     stop(
-      "Couldn't download metadata template. Make sure you are logged in to Synapse and that `synID` is a valid synapse ID.",
+      "Couldn't download metadata template. Make sure you are logged in to Synapse and that `synID` is a valid synapse ID.", # nolint
       .call = FALSE
     )
   }
@@ -167,7 +177,10 @@ get_template <- function(synID, ...) {
   ext <- tools::file_ext(filepath)
 
   if (!ext %in% c("xlsx", "csv")) {
-    stop("Error loading template: file format must be .csv or .xlsx", call. = FALSE)
+    stop(
+      "Error loading template: file format must be .csv or .xlsx",
+      call. = FALSE
+    )
   }
 
   if (ext == "xlsx") {

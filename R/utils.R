@@ -10,9 +10,11 @@ syn_travis_login <- function() {
 on_travis <- function() {
   if (identical(Sys.getenv("TRAVIS"), "true")) {
     return(TRUE)
-  } else {         # nocov start
+    # nocov start
+  } else {
     return(FALSE)
-  }                # nocov end
+  }
+  # nocov end
 }
 
 ## Get the value of an annotation on object(s) x
@@ -23,4 +25,18 @@ get_annotation <- function(ids, key) {
   ids <- purrr::set_names(ids)
   annots <- purrr::map(ids, function(x) synapser::synGetAnnotations(x)[[key]])
   unlist(annots)
+}
+
+## Save uploaded files to Synapse
+save_to_synapse <- function(input_file, parent, name = NULL) {
+  file_to_upload <- synapser::File(
+    input_file$datapath,
+    parent = parent,
+    name = name
+  )
+  synapser::synStore(file_to_upload)
+}
+
+"%||%" <- function(a, b) {
+  if (!is.null(a)) a else b
 }
