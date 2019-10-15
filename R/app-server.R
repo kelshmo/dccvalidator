@@ -49,7 +49,7 @@ app_server <- function(input, output, session) {
         upload_documents_server,
         "documentation",
         parent_folder = reactive(created_folder),
-        study_table_id = reactive("syn11363298")
+        study_table_id = reactive("syn20968992")
       )
     }
 
