@@ -44,7 +44,7 @@ upload_documents_ui <- function(id) {
         h3("Upload Study Documentation"),
         # nolint start
         p(
-          "Study documentation gives data users an understanding of the cohort, model system, or other unit based on experimental design through which the data has been generated, and the methods used for the assays and/or assessments. This should be similar to a materials and methods section in a paper. An example of what this information should include can be found ",
+          "Study documentation gives data users an understanding of the cohort or model system, experimental design and assay methods. This should be similar to a materials and methods section in a paper. An example of what this information should include can be found ",
           tags$a(href = "https://adknowledgeportal.synapse.org/#/Explore/Studies?Study=syn8391648", "here"),
           " for an animal model study and ",
           tags$a(href = "https://adknowledgeportal.synapse.org/#/Explore/Studies?Study=syn3159438", "here"),
