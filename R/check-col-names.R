@@ -43,7 +43,7 @@ check_cols_manifest <- function(data,
   if (is.null(data)) {
     return(NULL)
   }
-  id <- "syn20820080"
+  id <- "syn20782058"
   required <- get_template(id, ...)
   behavior <- paste0(
     "Manifest should contain columns: ",
@@ -71,11 +71,10 @@ check_cols_individual <- function(data, template,
   if (is.null(data)) {
     return(NULL)
   }
-  template <- match.arg(template, c("human", "animal"))
+  template <- match.arg(template, c("human"))
   id <- switch(
     template,
-    human = "syn12973254",
-    animal = "syn12973253"
+    human = "syn20781820"
   )
   required <- get_template(id, ...)
   behavior <- paste0(
@@ -104,11 +103,12 @@ check_cols_assay <- function(data, template,
   if (is.null(data)) {
     return(NULL)
   }
-  template <- match.arg(template, c("rnaSeq", "proteomics"))
+  template <- match.arg(template, c("rnaSeq", "ATACSeq", "wholeGenomeSeq"))
   id <- switch(
     template,
-    rnaSeq = "syn12973256",
-    proteomics = "syn12973255"
+    rnaSeq = "syn20768650",
+    ATACSeq = "syn20768526", 
+    wholeGenomeSeq = "syn20980993"
   )
   required <- get_template(id, ...)
   behavior <- paste0(
@@ -137,11 +137,10 @@ check_cols_biospecimen <- function(data, template,
   if (is.null(data)) {
     return(NULL)
   }
-  template <- match.arg(template, c("general", "drosophila"))
+  template <- match.arg(template, c("general"))
   id <- switch(
     template,
-    general = "syn12973252",
-    drosophila = "syn20673251"
+    general = "syn20768131"
   )
   required <- get_template(id, ...)
   behavior <- paste0(
