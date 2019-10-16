@@ -187,10 +187,7 @@ check_type <- function(values, key, annotations, whitelist_values = NULL,
   }
   correct_class <- switch(
     unique(as.character(coltype)),
-    "STRING" = "character",
-    "BOOLEAN" = "logical",
-    "INTEGER" = "integer",
-    "DOUBLE" = "numeric"
+    "string" = "character"
   )
   ## Convert factors to strings
   values <- if (is.factor(values)) as.character(values) else values
