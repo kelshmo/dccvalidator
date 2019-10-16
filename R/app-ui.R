@@ -86,7 +86,7 @@ app_ui <- function(request) {
                   selectInput(
                     "assay_name",
                     "Assay type",
-                    c("rnaSeq", "proteomics")
+                    c("rnaSeq", "ATACSeq", "wholeGenomeSeq")
                   )
                 ),
 
