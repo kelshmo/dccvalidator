@@ -34,16 +34,37 @@ app_ui <- function(request) {
                 br(),
                 br(),
 
-                # Files to be validated
                 shinyjs::disabled(
-                  fileInput(
-                    "indiv_meta",
-                    "Individual metadata file (.csv)",
-                    width = NULL,
-                    accept = c(
-                      "text/csv",
-                      "text/comma-separated-values,text/plain",
-                      ".csv"
+                  radioButtons(
+                    "species",
+                    "Species",
+                    c(
+                      "human"
+                    ),
+                    selected = "human"
+                  )
+                ),
+
+                shinyjs::disabled(
+                  selectInput(
+                    "assay_name",
+                    "Assay type",
+                    c("rnaSeq", "ATACSeq", "wholeGenomeSeq"))
+                ),
+
+                # Files to be validated
+                conditionalPanel(
+                  condition = "input.species != 'drosophila'",
+                  shinyjs::disabled(
+                    fileInput(
+                      "indiv_meta",
+                      "Individual metadata file (.csv)",
+                      width = NULL,
+                      accept = c(
+                        "text/csv",
+                        "text/comma-separated-values,text/plain",
+                        ".csv"
+                      )
                     )
                   )
                 ),
@@ -75,22 +96,7 @@ app_ui <- function(request) {
                 ),
 
                 shinyjs::disabled(
-                  radioButtons(
-                    "species",
-                    "Species",
-                    c("animal", "human")
-                  )
-                ),
 
-                shinyjs::disabled(
-                  selectInput(
-                    "assay_name",
-                    "Assay type",
-                    c("rnaSeq", "ATACSeq", "wholeGenomeSeq")
-                  )
-                ),
-
-                shinyjs::disabled(
                   fileInput(
                     "manifest",
                     "Upload Manifest File (.tsv or .txt)",
@@ -103,6 +109,7 @@ app_ui <- function(request) {
                   )
                 )
               ),
+
               # Main panel
               mainPanel(
                 tabsetPanel(
@@ -113,7 +120,7 @@ app_ui <- function(request) {
                       uiOutput("successes"),
                       solidHeader = TRUE,
                       collapsible = TRUE,
-                      title = "Successes",
+                      title = textOutput("num_success"),
                       status = "success",
                       width = 12
                     ),
@@ -121,7 +128,7 @@ app_ui <- function(request) {
                       uiOutput("warnings"),
                       solidHeader = TRUE,
                       collapsible = TRUE,
-                      title = "Warnings",
+                      title = textOutput("num_warn"),
                       status = "warning",
                       width = 12
                     ),
@@ -129,7 +136,7 @@ app_ui <- function(request) {
                       uiOutput("failures"),
                       solidHeader = TRUE,
                       collapsible = TRUE,
-                      title = "Failures",
+                      title = textOutput("num_fail"),
                       status = "danger",
                       width = 12
                     )
