@@ -103,11 +103,12 @@ check_cols_assay <- function(data, template,
   if (is.null(data)) {
     return(NULL)
   }
-  template <- match.arg(template, c("rnaSeq", "ATACSeq"))
+  template <- match.arg(template, c("rnaSeq", "ATACSeq", "wholeGenomeSeq"))
   id <- switch(
     template,
     rnaSeq = "syn20768650",
-    ATACSeq = "syn20768526"
+    ATACSeq = "syn20768526", 
+    wholeGenomeSeq = "syn20980993"
   )
   required <- get_template(id, ...)
   behavior <- paste0(
