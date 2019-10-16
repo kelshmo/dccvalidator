@@ -258,7 +258,7 @@ check_value <- function(values, key, annotations, whitelist_keys = NULL,
   whitelist <- unique(whitelist_values[[key]])
 
   if (missing(annotations)) {
-    annotations <- syndccutils::get_synapse_annotations("syn20957723")
+    annotations <- syndccutils::get_synapse_annotations(synID = "syn20981788")
   }
   if (!key %in% annotations$key) {
     return(NULL)

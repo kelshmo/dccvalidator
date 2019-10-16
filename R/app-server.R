@@ -54,7 +54,7 @@ app_server <- function(input, output, session) {
     }
 
     ## Download annotation definitions
-    annots <- get_synapse_annotations(synID = "syn20957723")
+    annots <- get_synapse_annotations(synID = "syn20981788")
 
     ## Upload files to Synapse (after renaming them so they keep their original
     ## names)
