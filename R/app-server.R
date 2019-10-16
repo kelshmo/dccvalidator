@@ -172,8 +172,8 @@ app_server <- function(input, output, session) {
           title = "Instructions",
           # nolint start
           instructions(
-            annots_link = "https://shinypro.synapse.org/users/nsanati/annotationUI/",
-            templates_link = "https://www.synapse.org/#!Synapse:syn18512044"
+            annots_link = "https://www.synapse.org/#!Synapse:syn20729790",
+            templates_link = "https://www.synapse.org/#!Synapse:syn20729790"
           ),
           # nolint end
           easyClose = TRUE
