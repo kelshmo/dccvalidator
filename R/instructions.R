@@ -21,6 +21,10 @@ instructions <- function(annots_link, templates_link) {
       "To read more about the correct format of a manifest, see this",
       HTML("<a target=\"_blank\" href=\"https://docs.synapse.org/articles/uploading_in_bulk.html\">documentation</a>.")
     ),
+    p(
+      "To explore accepted annotation keys and values, refer to the",
+      HTML(glue::glue("<a target=\"_blank\" href=\"{annots_link}\">annotation dictionary</a>."))
+    ),
     p("Note you must be logged in to Synapse for this application to work.")
   )
   # nolint end
