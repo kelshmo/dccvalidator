@@ -154,7 +154,7 @@ check_keys <- function(x, annotations, whitelist_keys = NULL,
   }
   ## Get annotations if not passed in
   if (missing(annotations)) {
-    annotations <- syndccutils::get_synapse_annotations(synID = "syn20981788")
+    annotations <- syndccutils::get_synapse_annotations()
   }
   if (!all(c("key", "value", "columnType") %in% names(annotations))) {
     stop(
