@@ -44,7 +44,6 @@ check_cols_manifest <- function(data, id,
   if (is.null(data)) {
     return(NULL)
   }
-
   required <- get_template(id, ...)
   behavior <- glue::glue(
     "Manifest should contain columns: {glue::glue_collapse(required, sep = ', ')}" # nolint
