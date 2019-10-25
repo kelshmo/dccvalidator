@@ -6,8 +6,8 @@ app_ui <- function(request) {
 
     dashboardSidebar(
       sidebarMenu(
-        menuItem("Validator", tabName = "validator"),
-        menuItem("Documentation", tabName = "documentation")
+        menuItem("Documentation", tabName = "documentation"),
+        menuItem("Validator", tabName = "validator")
       )
     ),
 
@@ -34,14 +34,14 @@ app_ui <- function(request) {
                 br(),
                 br(),
 
+                # UI for getting the study name
+                get_study_ui("study"),
+
                 shinyjs::disabled(
                   radioButtons(
                     "species",
                     "Species",
-                    c(
-                      "human"
-                    ),
-                    selected = "human"
+                    config::get("species_list")
                   )
                 ),
 
@@ -49,7 +49,8 @@ app_ui <- function(request) {
                   selectInput(
                     "assay_name",
                     "Assay type",
-                    c("rnaSeq", "ATACSeq", "wholeGenomeSeq"))
+                    names(config::get("templates")$assay_templates)
+                  )
                 ),
 
                 # Files to be validated
@@ -105,6 +106,16 @@ app_ui <- function(request) {
                       "text/tsv",
                       "text/tab-separated-values,text/plain",
                       ".tsv"
+                    )
+                  )
+                ),
+
+                # Add an indicator feature to validate button
+                with_busy_indicator_ui(
+                  shinyjs::disabled(
+                    actionButton(
+                      "validate_btn",
+                      "Validate"
                     )
                   )
                 )
