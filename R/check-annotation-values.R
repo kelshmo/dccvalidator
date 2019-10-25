@@ -199,7 +199,7 @@ check_type <- function(values, key, annotations, whitelist_values = NULL,
     "BOOLEAN" = "logical",
     "INTEGER" = "integer",
     "DOUBLE" = "numeric"
-    )
+  )
   ## Convert factors to strings
   values <- if (is.factor(values)) as.character(values) else values
 
