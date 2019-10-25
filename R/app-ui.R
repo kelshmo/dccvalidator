@@ -97,7 +97,6 @@ app_ui <- function(request) {
                 ),
 
                 shinyjs::disabled(
-
                   fileInput(
                     "manifest",
                     "Upload Manifest File (.tsv or .txt)",
